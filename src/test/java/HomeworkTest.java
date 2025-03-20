@@ -10,9 +10,10 @@ import static com.codeborne.selenide.Selenide.*;
 public class HomeworkTest {
 
     @BeforeAll
-    static void Browser() {
+    static void beforeAll() {
         Configuration.baseUrl = "https://demoqa.com";
         Configuration.pageLoadStrategy = "eager";
+        Configuration.browserSize = "1920x1080";
         //Configuration.holdBrowserOpen = true;
     }
 
@@ -23,7 +24,7 @@ public class HomeworkTest {
         $("#firstName").setValue("Andrey");
         $("#lastName").setValue("Pronkin");
         $("#userEmail").setValue("kinst@mail.ru");
-        $(byText("Female")).click();
+        $("#gender-radio-1").parent().$(byText("Male")).click();
         $("#userNumber").setValue("0987654321");
         $("#dateOfBirthInput").click();
         $(".react-datepicker__month-select").click();
@@ -45,7 +46,7 @@ public class HomeworkTest {
         $("#example-modal-sizes-title-lg").shouldHave(text("Thanks for submitting the form"));
         $(".table-responsive").$(byText("Student Name")).parent().shouldHave(text("Andrey Pronkin"));
         $(".table-responsive").$(byText("Student Email")).parent().shouldHave(text("kinst@mail.ru"));
-        $(".table-responsive").$(byText("Gender")).parent().shouldHave(text("Female"));
+        $(".table-responsive").$(byText("Gender")).parent().shouldHave(text("Male"));
         $(".table-responsive").$(byText("Mobile")).parent().shouldHave(text("0987654321"));
         $(".table-responsive").$(byText("Date of Birth")).parent().shouldHave(text("17 March,2015"));
         $(".table-responsive").$(byText("Subjects")).parent().shouldHave(text("Computer Science, Arts"));
